@@ -6,13 +6,9 @@ import javax.swing.*;
 import java.util.Arrays;
 
 /**
- * Background Subtraction
- * by Golan Levin.
- * <p>
- * Detect the presence of people and objects in the videoFrame using a simple
- * background-subtraction technique. To initialize the background, press a key.
+ * Side-by-side webcam view for image filtering
+ * by David Dobervich
  */
-
 public class FilterView extends PApplet {
     private static final int WEBCAM_WIDTH = 640;
     private static final int WEBCAM_HEIGHT = 480;
