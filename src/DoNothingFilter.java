@@ -4,7 +4,7 @@ public class DoNothingFilter implements PixelFilter {
 
     @Override
     public DImage processImage(DImage img) {
-        // don't change the input array at all!
+        // we don't change the input image at all!
         return img;
     }
 
