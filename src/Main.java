@@ -29,6 +29,7 @@ public class Main extends PApplet {
     private PixelFilter filter;
     private int count = 0;
     private String colorString = "";
+    private boolean paused = false;
 
     public void settings() {
         displayVideoSourceChoiceDialog();
@@ -127,6 +128,8 @@ public class Main extends PApplet {
     }
 
     public void captureEvent(Capture c) {
+        if (paused) return;
+
         oldFilteredFrame = filteredFrame;
         loading = true;
 
@@ -139,6 +142,8 @@ public class Main extends PApplet {
     }
 
     public void movieEvent(Movie m) {
+        if (paused) return;
+
         oldFilteredFrame = filteredFrame;
         loading = true;
         m.read();
@@ -162,6 +167,18 @@ public class Main extends PApplet {
 
         if (key == 's' || key == 'S') {
             currentlyViewingFilteredImage = !currentlyViewingFilteredImage;
+        }
+
+        if (key == 'p' || key == 'P') {
+            paused = !paused;
+
+            if (source != WEBCAM && movie != null) {
+                if (paused) {
+                    movie.pause();
+                } else {
+                    movie.play();
+                }
+            }
         }
     }
 
