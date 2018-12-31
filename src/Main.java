@@ -72,21 +72,16 @@ public class Main extends PApplet {
     }
 
     public void draw() {
-        // TODO: re-organize this so currentlyViewingFiltered image is top level if
-        if (frame != null && filteredFrame != null) {
-            if (!loading) {
-                draw(frame, filteredFrame);
-            } else if (oldFilteredFrame != null){
-                draw(frame, oldFilteredFrame);
-            }
-        }
-    }
-
-    public void draw(DImage original, DImage filtered) {
         if (currentlyViewingFilteredImage) {
-            drawFrame(filtered, width/2, height/2);
-        } else {
-            drawFrame(original, width / 2, height / 2);
+            if (frame != null) {
+                drawFrame(frame, width / 2, height / 2);
+            }
+        } else {        // viewing filtered
+            if (!loading && filteredFrame != null) {
+                drawFrame(filteredFrame, width / 2, height / 2);
+            } else if (oldFilteredFrame != null) {
+                drawFrame(oldFilteredFrame, width / 2, height / 2);
+            }
         }
     }
 
@@ -104,8 +99,8 @@ public class Main extends PApplet {
     }
 
     public void captureEvent(Capture c) {
-        loading = true;
         oldFilteredFrame = filteredFrame;
+        loading = true;
 
         c.read();
         frame = new DImage(c.get());
@@ -116,6 +111,7 @@ public class Main extends PApplet {
     }
 
     public void movieEvent(Movie m) {
+        oldFilteredFrame = filteredFrame;
         loading = true;
         m.read();
         frame = new DImage(m.get());
@@ -146,7 +142,7 @@ public class Main extends PApplet {
         PixelFilter f = null;
         try {
             Class c = Class.forName(name);
-            f = (PixelFilter)c.newInstance();
+            f = (PixelFilter) c.newInstance();
         } catch (Exception e) {
             System.err.println("Something went wrong when instantiating your processImage! " + e.getMessage());
             System.err.println(e.getMessage());
