@@ -27,6 +27,8 @@ public class Main extends PApplet {
     private int imageWidth, imageHeight;
 
     private PixelFilter filter;
+    private int count = 0;
+    private String colorString = "";
 
     public void settings() {
         displayVideoSourceChoiceDialog();
@@ -85,6 +87,30 @@ public class Main extends PApplet {
         } else {        // viewing filtered
             drawFrame(currentFiltered, frame, currentFiltered, centerX - frame.getWidth()/2, centerY - frame.getHeight()/2);
         }
+
+        fill(100);
+        rect(0, height-20*2, width, 20*2);
+        fill(0);
+
+        count++;
+        if (count == 11) {
+            colorString = colorStringAt(mouseX, mouseY);
+            count = 0;
+        }
+        text(mousePositionString() + " " + colorString, 10, height - 20);
+    }
+
+    private String colorStringAt(int mouseX, int mouseY) {
+        loadPixels();
+        int c = pixels[mouseY*width + mouseX];
+        float red = red(c);
+        float green = green(c);
+        float blue = blue(c);
+        return "r: " + red +  " g: " + green + " b: " + blue;
+    }
+
+    private String mousePositionString() {
+        return "(" + (mouseX - centerX + frame.getWidth()/2) + ", " + (mouseY - centerY + frame.getHeight()/2) + ")";
     }
 
     public void drawFrame(DImage toDisplay, DImage original, DImage filtered, int x, int y) {
