@@ -72,27 +72,25 @@ public class Main extends PApplet {
     }
 
     public void draw() {
+        if (frame == null) return;
+        if (oldFilteredFrame == null) oldFilteredFrame = frame;
+        DImage currentFiltered = (!loading && filteredFrame != null) ? filteredFrame : oldFilteredFrame;
+
         if (currentlyViewingFilteredImage) {
-            if (frame != null) {
-                drawFrame(frame, width / 2, height / 2);
-            }
+            drawFrame(frame, frame, currentFiltered, width / 2, height / 2);
         } else {        // viewing filtered
-            if (!loading && filteredFrame != null) {
-                drawFrame(filteredFrame, width / 2, height / 2);
-            } else if (oldFilteredFrame != null) {
-                drawFrame(oldFilteredFrame, width / 2, height / 2);
-            }
+            drawFrame(currentFiltered, frame, currentFiltered, width / 2, height / 2);
         }
     }
 
-    public void drawFrame(DImage f, int x, int y) {
-        image(f.getPImage(), x, y);
+    public void drawFrame(DImage toDisplay, DImage original, DImage filtered, int x, int y) {
+        image(toDisplay.getPImage(), x, y);
 
         if (filter != null) {
             pushMatrix();
             translate(x, y);
 
-            filter.drawOverlay(this);
+            filter.drawOverlay(this, original, filtered);
 
             popMatrix();
         }
