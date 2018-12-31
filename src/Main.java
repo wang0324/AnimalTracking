@@ -23,11 +23,16 @@ public class Main extends PApplet {
     private DImage frame, filteredFrame, oldFilteredFrame;
     private boolean loading = false;
 
+    private int centerX, centerY;
+    private int imageWidth, imageHeight;
+
     private PixelFilter filter;
 
     public void settings() {
         displayVideoSourceChoiceDialog();
         size(800, 800);
+        centerX = width/2;
+        centerY = height/2;
     }
 
     private void displayVideoSourceChoiceDialog() {
@@ -59,7 +64,6 @@ public class Main extends PApplet {
     }
 
     public void setup() {
-        imageMode(PApplet.CENTER);
         if (source != WEBCAM && movie == null) {
             System.err.println("No mp4 file loaded, switching to webcam as video source");
             source = WEBCAM;
@@ -77,9 +81,9 @@ public class Main extends PApplet {
         DImage currentFiltered = (!loading && filteredFrame != null) ? filteredFrame : oldFilteredFrame;
 
         if (currentlyViewingFilteredImage) {
-            drawFrame(frame, frame, currentFiltered, width / 2, height / 2);
+            drawFrame(frame, frame, currentFiltered, centerX - frame.getWidth()/2, centerY - frame.getHeight()/2);
         } else {        // viewing filtered
-            drawFrame(currentFiltered, frame, currentFiltered, width / 2, height / 2);
+            drawFrame(currentFiltered, frame, currentFiltered, centerX - frame.getWidth()/2, centerY - frame.getHeight()/2);
         }
     }
 
