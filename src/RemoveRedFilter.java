@@ -18,6 +18,7 @@ public class RemoveRedFilter implements PixelFilter {
 
     @Override
     public void drawOverlay(PApplet window) {
-
+        window.fill(255, 0, 0);
+        window.ellipse(0, 0, 10, 10);
     }
 }
