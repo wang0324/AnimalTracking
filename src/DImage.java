@@ -1,3 +1,4 @@
+import processing.core.PApplet;
 import processing.core.PImage;
 
 import java.awt.*;
@@ -70,14 +71,7 @@ public class DImage {
         this.setPixels(colorPixels);
     }
 
-    // -----------------------------------------
-    // Drawing methods to draw on to image
-
-    public void rect(int x, int y, int w, int h) {
-
-    }
-
-    // -----------------------------------------
+    // --------------------------------------------------------------------------------------------------------------
 
     public static final int OPAQUE_ALPHA_VAL = 255;
     public static final int TRANSPARENT_ALPHA_VAL = 0;

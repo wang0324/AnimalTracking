@@ -1,10 +1,8 @@
 import processing.core.PApplet;
-import processing.core.PImage;
 import processing.video.Capture;
 import processing.video.Movie;
 
 import javax.swing.*;
-import java.awt.*;
 import java.io.File;
 
 /**
@@ -74,23 +72,34 @@ public class Main extends PApplet {
     }
 
     public void draw() {
+        // TODO: re-organize this so currentlyViewingFiltered image is top level if
         if (frame != null && filteredFrame != null) {
             if (!loading) {
-
-                if (currentlyViewingFilteredImage) {
-                    image(filteredFrame.getPImage(), width/2, height/2);
-                } else {
-                    image(frame.getPImage(), width / 2, height / 2);
-                }
-
+                draw(frame, filteredFrame);
             } else if (oldFilteredFrame != null){
-                if (currentlyViewingFilteredImage) {
-                    image(oldFilteredFrame.getPImage(), width/2, height/2);
-                } else {
-                    image(frame.getPImage(), width / 2, height / 2);
-                }
-
+                draw(frame, oldFilteredFrame);
             }
+        }
+    }
+
+    public void draw(DImage original, DImage filtered) {
+        if (currentlyViewingFilteredImage) {
+            drawFrame(filtered, width/2, height/2);
+        } else {
+            drawFrame(original, width / 2, height / 2);
+        }
+    }
+
+    public void drawFrame(DImage f, int x, int y) {
+        image(f.getPImage(), x, y);
+
+        if (filter != null) {
+            pushMatrix();
+            translate(x, y);
+
+            filter.drawOverlay(this);
+
+            popMatrix();
         }
     }
 
@@ -118,7 +127,7 @@ public class Main extends PApplet {
     }
 
     private DImage runFilters(DImage frameToFilter) {
-        if (filter != null) return filter.filter(frameToFilter);
+        if (filter != null) return filter.processImage(frameToFilter);
         return frameToFilter;
     }
 
@@ -133,13 +142,13 @@ public class Main extends PApplet {
     }
 
     private PixelFilter loadNewFilter() {
-        String name = JOptionPane.showInputDialog("Type the name of your filter class");
+        String name = JOptionPane.showInputDialog("Type the name of your processImage class");
         PixelFilter f = null;
         try {
             Class c = Class.forName(name);
             f = (PixelFilter)c.newInstance();
         } catch (Exception e) {
-            System.err.println("Something went wrong when instantiating your filter! " + e.getMessage());
+            System.err.println("Something went wrong when instantiating your processImage! " + e.getMessage());
             System.err.println(e.getMessage());
         }
 

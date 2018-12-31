@@ -1,7 +1,9 @@
+import processing.core.PApplet;
+
 public class RemoveRedFilter implements PixelFilter {
 
     @Override
-    public DImage filter(DImage img) {
+    public DImage processImage(DImage img) {
         DImage.ColorComponents2d channels = img.getColorChannels();
 
         for (int r = 0; r < img.getHeight(); r++) {
@@ -12,5 +14,10 @@ public class RemoveRedFilter implements PixelFilter {
 
         img.setColorChannels(channels);
         return img;
+    }
+
+    @Override
+    public void drawOverlay(PApplet window) {
+
     }
 }

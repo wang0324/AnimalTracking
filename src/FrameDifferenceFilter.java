@@ -1,10 +1,12 @@
+import processing.core.PApplet;
+
 public class FrameDifferenceFilter implements PixelFilter {
     private static final short THRESHOLD = 5;
     private static final short THRESHOLD2 = 10;
     private DImage lastFrame;
 
     @Override
-    public DImage filter(DImage img) {
+    public DImage processImage(DImage img) {
         if (lastFrame == null) {
             lastFrame = img;
             System.out.println("no frame");
@@ -31,5 +33,10 @@ public class FrameDifferenceFilter implements PixelFilter {
         lastFrame = img;
 
         return toDisplay;
+    }
+
+    @Override
+    public void drawOverlay(PApplet window) {
+
     }
 }
