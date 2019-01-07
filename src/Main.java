@@ -9,6 +9,7 @@ import java.io.File;
  * Side-by-side webcam view for image filtering
  * by David Dobervich
  */
+
 public class Main extends PApplet {
     private static final int WEBCAM_WIDTH = 640;
     private static final int WEBCAM_HEIGHT = 480;

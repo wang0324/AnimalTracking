@@ -5,6 +5,7 @@ import java.awt.*;
 import java.util.Arrays;
 
 public class DImage {
+
     private PImage img;
     private int width, height;
     private ColorComponents2d channels;
