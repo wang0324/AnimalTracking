@@ -22,11 +22,7 @@ public class RandomWalk implements PixelFilter {
 
     @Override
     public void drawOverlay(PApplet window, DImage original, DImage filtered) {
-        for (Point p: points) {
-            window.fill(255,0,0);
-            window.ellipse(p.getX(), p.getY(), 10, 10);
-            p.takeRandomStep();
-        }
+        a
     }
 
 }
