@@ -14,7 +14,4 @@ public class BWFilter implements PixelFilter {
 
     }
 
-    public void drawOverlay(PApplet window) {
-
-    }
 }
