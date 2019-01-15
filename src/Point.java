@@ -1,37 +1,25 @@
 public class Point {
-    private int x, y;
+    private int r, c;
 
-    public Point(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public Point(int r, int c) {
+        this.r = r;
+        this.c = c;
     }
 
-    public int getX() {
-        return x;
+    public int getRow() {
+        return r;
     }
 
-    public void setX(int x) {
-        this.x = x;
+    public void setRow(int r) {
+        this.r = r;
     }
 
-    public int getY() {
-        return y;
+    public int getCol() {
+        return c;
     }
 
-    public void setY(int y) {
-        this.y = y;
+    public void setCol(int c) {
+        this.c = c;
     }
 
-    public void takeRandomStep() {
-        int rand = (int) (Math.random() * 4);
-        if (rand == 0) {
-            this.x += 3;
-        } else if (rand == 1) {
-            this.y += 3;
-        } else if (rand == 2) {
-            this.x -= 3;
-        } else {
-            this.y -= 3;
-        }
-    }
 }

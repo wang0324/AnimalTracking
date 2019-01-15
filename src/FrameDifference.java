@@ -16,7 +16,7 @@ public class FrameDifference implements PixelFilter {
         for (int i = 0; i < img.getHeight(); i++) {
             for (int j = 0; j < img.getWidth(); j++) {
                 int difference = Math.abs(current[i][j] - previous[i][j]);
-                if (difference > 40) {
+                if (difference > 10) {
                     current[i][j] = 255;
                 }
                 else {
