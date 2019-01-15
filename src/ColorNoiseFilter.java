@@ -34,8 +34,5 @@ public class ColorNoiseFilter implements PixelFilter {
     public void drawOverlay(PApplet window, DImage original, DImage filtered) {
 
     }
-
-    public void drawOverlay(PApplet window) {
-
-    }
+    
 }
