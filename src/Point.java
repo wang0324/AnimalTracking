@@ -23,20 +23,14 @@ public class Point {
     }
 
     public void takeRandomStep() {
-        int rand = (int)(Math.random()*4);
-        if (rand==0) {
+        int rand = (int) (Math.random() * 4);
+        if (rand == 0) {
             this.x += 3;
-        }
-
-        else if (rand==1) {
+        } else if (rand == 1) {
             this.y += 3;
-        }
-
-        else if (rand==2) {
+        } else if (rand == 2) {
             this.x -= 3;
-        }
-
-        else {
+        } else {
             this.y -= 3;
         }
     }
