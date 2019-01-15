@@ -19,10 +19,12 @@ public class RandomWalk implements PixelFilter {
         // we don't change the input image at all!
         return img;
     }
+    // I need to blur the image and then after bluring it it shoulld get rid of the noise
+
 
     @Override
     public void drawOverlay(PApplet window, DImage original, DImage filtered) {
-        a
+
     }
 
 }

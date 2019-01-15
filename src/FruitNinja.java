@@ -57,7 +57,7 @@ public class FruitNinja implements PixelFilter {
 
     @Override
     public void drawOverlay(PApplet window, DImage original, DImage filtered) {
-
+        //keep drawing new circles
     }
 
 }

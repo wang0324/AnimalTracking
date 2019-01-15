@@ -5,7 +5,7 @@ public class BWFilter implements PixelFilter {
     @Override
     public DImage processImage(DImage img) {
         short [][] pixels = img.getBWPixelGrid();
-        img.setPixels(pixels);
+        img.setPixels(pixels                                          );
         return img;
     }
 
