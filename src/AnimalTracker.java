@@ -66,12 +66,16 @@ public class AnimalTracker implements PixelFilter {
         performSecondThreshold(out2);
 
         calculateCenterPoint(out2);
-        
+
         img.setPixels(out2);
 
         return img;
     }
 
+    /**
+     * Calculates the center point
+     * @param out2 2D array of grayscale pixels that already have been processed
+     */
     private void calculateCenterPoint(short[][] out2) {
         double totalX = 0, totalY = 0, count = 0;
 
@@ -88,6 +92,10 @@ public class AnimalTracker implements PixelFilter {
         avgY = (int)(totalY/count);
     }
 
+    /**
+     * Second Color Mask after blurring frame
+     * @param out2 2D array of grayscale pixels that have already gone through an initail threshold and a blur
+     */
     private void performSecondThreshold(short[][] out2) {
         for (int r = 0; r < out.length; r++) {
             for (int c = 0; c < out[0].length; c++) {
@@ -102,6 +110,11 @@ public class AnimalTracker implements PixelFilter {
 
     }
 
+    /**
+     * Take in an array of gray-scale pixels that already have been color masked and performs a gaussian blur
+     * @param out 2d array of gray-scale pixels that already have been color masked
+     * @param out2 empty 2d array that will be filled with blurred pixels
+     */
     private void performBlur(short[][] out, short[][] out2) {
         for (int r = 0; r < out.length - mask.length - 1; r++) {
             for (int c = 0; c < out[0].length - mask.length - 1; c++) {
