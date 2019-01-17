@@ -1,7 +1,27 @@
 import processing.core.PApplet;
 
 public class AnimalTracker implements PixelFilter {
+//TODO: Implement 3 methods
+    /*
+3 kinds of methods:
+    Configuration Methods: (setup ahead of time
+    -Set regions of interest (radius of inner egion, threshold for "close to" wall
+    - Define cm per pixel
+    - Define seconds per frame
+    Methods to add data:
+    -dataset.addMouseLocation(x,y)
+    -dataset.addMouseSpeed(currentSpeed)
+    Methods to report data at the end:
+    -dataset.getAverageSpeed()
+    - dataset.getAverageSpeed(2,10)
 
+    API Design:
+    - Easy to learn and memorize
+    - Leads to readble code
+    - Hard to misuse
+    - Easy to extend
+    - Complete
+ */
     //radius 210
     //Center (308, 234) x, y
     private static short[][] out;
