@@ -19,6 +19,10 @@ public class DataSet {
 
     private double diameterOfField;
 
+    private double distanceFromCenterThreshold;
+
+    private double distanceFromWallThreshold;
+
     public DataSet() {
         centers = new ArrayList<>();
         timeInRegion = new ArrayList<>();
@@ -98,10 +102,9 @@ public class DataSet {
 
     /**
      * Finds time spent "close to" center(user defined)
-     * @param threshold distance from center that would count as "close to" it
      * @return time spent close to center
      */
-    public double getTimeSpentNearCenter(double threshold) {
+    public double getTimeSpentNearCenter() {
         return 0;
     }
 
@@ -139,6 +142,24 @@ public class DataSet {
      * @param diameter diameter you want to set the field diameter to
      */
     public void setDiameterOfField(double diameter) {
+
+    }
+
+    /**
+     * Sets threshold for distance from center
+     * @param threshold threshold for getTimeSpentNearCenter()
+     */
+    public void setDistanceFromCenterThreshold(double threshold) {
+        if (threshold > 0) {
+            this.distanceFromCenterThreshold = threshold;
+        }
+    }
+
+    /**
+     * Sets threshold for distance from wall
+     * @param threshold threshold for getTimeSpentNearWall()
+     */
+    public void setDistanceFromWallThreshold(double threshold) {
 
     }
 }
