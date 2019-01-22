@@ -36,7 +36,9 @@ public class DataSet {
      * @param center Point object of center
      */
     public void addCenter(Point center) {
-
+        if (center != null) {
+            centers.add(center);
+        }
     }
 
     /**
