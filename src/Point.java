@@ -1,12 +1,12 @@
 public class Point {
-    private int r, c;
+    private double r, c;
 
-    public Point(int r, int c) {
+    public Point(double r, double c) {
         this.r = r;
         this.c = c;
     }
 
-    public int getRow() {
+    public double getRow() {
         return r;
     }
 
@@ -14,7 +14,7 @@ public class Point {
         this.r = r;
     }
 
-    public int getCol() {
+    public double getCol() {
         return c;
     }
 
