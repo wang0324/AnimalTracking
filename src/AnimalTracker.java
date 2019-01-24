@@ -45,6 +45,8 @@ public class AnimalTracker implements PixelFilter {
 
     private static final int THRESHOLD = 30;
 
+    DataSet data = new DataSet();
+
     @Override
     public DImage processImage(DImage img) {
     //TODO: Include tail and filter surroundings at the same time
@@ -67,6 +69,7 @@ public class AnimalTracker implements PixelFilter {
 
         calculateCenterPoint(out2);
 
+        data.addCenter(avgY, avgX);
         img.setPixels(out2);
 
         return img;
@@ -178,6 +181,11 @@ public class AnimalTracker implements PixelFilter {
 
     @Override
     public void drawOverlay(PApplet window, DImage original, DImage filtered) {
+
+        window.fill(0,255,0);
+        window.textSize(30);
+        window.text(Double.toString(data.getDistanceTraveled()), 50, 50);
+
         window.fill(0,0,0);
         window.ellipse(308, 234, 5,5);
 
@@ -185,6 +193,8 @@ public class AnimalTracker implements PixelFilter {
         window.ellipse(avgX, avgY, 10, 10);
 
         window.line(308, 234, avgX, avgY);
+
+
     }
 
 }

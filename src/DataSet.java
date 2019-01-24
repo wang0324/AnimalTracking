@@ -19,6 +19,8 @@ public class DataSet {
 
     private double distanceFromWallThreshold;
 
+    private double framesPassed = 0;
+
     public Point centerOfField = new Point(308, 234);
 
     public Point previousCenter;
@@ -35,7 +37,7 @@ public class DataSet {
      * @param center Point object of center
      */
     public void addCenter(Point center) {
-        if (centers != null) {
+        if (centers != null && previousCenter != null) {
             centers.add(center);
             this.totalDistance += findDistance(center, previousCenter);
             ++this.framesPassed;
@@ -44,6 +46,10 @@ public class DataSet {
             previousCenter = new Point(center.getRow(), center.getCol());
             ++this.framesPassed;
         }
+    }
+
+    public void addCenter(double r, double c) {
+        addCenter(new Point(r, c));
     }
 
     /**
