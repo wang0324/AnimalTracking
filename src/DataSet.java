@@ -17,7 +17,7 @@ public class DataSet {
 
     private final int FPS = 30; //temp variable
 
-    private double diameterOfField;
+    private double radiusOfField = radiusOfField;
 
     private double distanceFromCenterThreshold;
 
@@ -31,12 +31,6 @@ public class DataSet {
         centers = new ArrayList<>();
         timeInRegion = new ArrayList<>();
 
-    }
-
-    public DataSet(double diameter) {
-        centers = new ArrayList<>();
-        timeInRegion = new ArrayList<>();
-        this.diameterOfField = diameter;
     }
 
     /**
@@ -110,7 +104,7 @@ public class DataSet {
     public double getDistanceFromWall(double time) {
         int frame = convertSecondToFrame(time);
         Point p = centers.get(frame);
-        return findDistance(p, centerOfField) - 205;
+        return findDistance(p, centerOfField) - radiusOfField;
     }
 
     /**
@@ -126,7 +120,7 @@ public class DataSet {
 
             double distance = findDistance(curPoint, centerOfField);
 
-            if (distance < 205 - distanceFromCenterThreshold) {
+            if (distance < radiusOfField - distanceFromCenterThreshold) {
                 frames++;
             }
         }
