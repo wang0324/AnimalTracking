@@ -11,10 +11,6 @@ public class DataSet {
     //Time codes for mouse in a region
     private ArrayList<Integer> timeInRegion;
 
-    private double currentSpeed;
-
-    private double framesPassed;
-
     private final int FPS = 30; //temp variable
 
     private double radiusOfField = 205;
