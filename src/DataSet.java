@@ -17,7 +17,7 @@ public class DataSet {
 
     private final int FPS = 30; //temp variable
 
-    private double radiusOfField = radiusOfField;
+    private double radiusOfField = 205;
 
     private double distanceFromCenterThreshold;
 
@@ -191,6 +191,11 @@ public class DataSet {
         return convertSecondToFrame(time);
     }
 
+    // 79 cm to 420 pixels
+    private double convertSpeedToPixelsPerFrame(double speed) {
+        return (speed*(1.0/FPS)*(420.0/79.0));
+    }
+
     /**
      * Finds time spent in a user defined region
      *
@@ -209,13 +214,13 @@ public class DataSet {
     }
 
     /**
-     * Set field diameter
+     * Set field radius
      *
-     * @param diameter diameter you want to set the field diameter to
+     * @param radius radius you want to set the field diameter to
      */
-    public void setDiameterOfField(double diameter) {
-        if (diameter > 0) {
-            diameterOfField = diameter;
+    public void setRadiusOfField(double radius) {
+        if (radius > 0) {
+            radiusOfField = radius;
         }
     }
 
