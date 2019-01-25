@@ -1,4 +1,5 @@
 # AnimalTracking
+Tracks objects in an mp4 file or live video. Currently implemented to track mice and determine features such as its speed, distance traveled, time spent near walls, etc. Only mice of the target color will be tracked while everything else will be filtered out (Currently detects dark colored objects).
 
 ## Usage
 
