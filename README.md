@@ -1,6 +1,6 @@
 # AnimalTracking
 
-## How To Use
+## Usage
 
 ### Prerequisites
 
