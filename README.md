@@ -45,7 +45,6 @@ This project is currently open source are free for anyone to contribute. Simply 
 * **Kevin Wang** - *Tracker and DataSet Implementation* - [wang0324](https://github.com/wang0324)
 * **Young Yu** - *Github README template* - [yyu2002](https://github.com/yyu2002)
 
-## TODO
-- Make the tracker work for all the different mouse videos
-- Return the data into a file or make another window to display it on screen
-- Work for other animals, not just mice
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
