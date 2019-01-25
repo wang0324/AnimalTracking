@@ -36,8 +36,9 @@ Runnable on any IDE (I prefer IntelliJ for easy setup and cloning).
 
 ## Authors
 
-* **David Dobervich** - *Framework and UI* - [ddobervich](http://github.com/ddobervich)
+* **David Dobervich** - *Framework and UI* - [ddobervich](https://github.com/ddobervich)
 * **Kevin Wang** - *Tracker and DataSet Implementation* - [wang0324](https://github.com/wang0324)
+* **Young Yu** - *Github README template* - [yyu2002](https://github.com/yyu2002)
 
 ## TODO
 - Make the tracker work for all the different mouse videos
