@@ -35,6 +35,10 @@ Runnable on any IDE (I prefer IntelliJ for easy setup and cloning).
 * [jogl](http://jogamp.org/jogl/www/) - wrapper library
 * [video](https://processing.org/reference/libraries/video/index.html) - video capturing
 
+## Contributing
+
+This project is currently open source are free for anyone to contribute. Simply create a new branch, make a pull request, and I will verify whether or not the edits are valid.
+
 ## Authors
 
 * **David Dobervich** - *Framework and UI* - [ddobervich](https://github.com/ddobervich)
