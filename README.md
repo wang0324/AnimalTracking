@@ -14,7 +14,7 @@ All of the libraries required to run the program are included in the lib folder.
 Runnable on any IDE (I prefer IntelliJ for easy setup and cloning).
 
 ```
- $ git clone https://github.com/yyu2002/VideoImageClustering.git
+ $ git clone https://github.com/wang0324/AnimalTracking.git
 ```
 
 ### Running AnimalTracker
