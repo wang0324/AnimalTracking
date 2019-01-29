@@ -29,6 +29,8 @@ public class AnimalTracker implements PixelFilter {
 
     private int avgX = 0, avgY = 0;
 
+    private int frameCounter = 0;
+
     private static double [][] mask = {
             {0.003765, 0.015019, 0.023792, 0.015019, 0.003765},
             {0.015019, 0.059912, 0.094907, 0.059912, 0.015019},
@@ -58,7 +60,9 @@ public class AnimalTracker implements PixelFilter {
         In drawoverlay draw a point over center and tail and display coordinates that
         can be used to find patterns in mouse behavior
          */
-
+        if (frameCounter == 300) {
+            data.saveDataToFile("Data\\centers.csv");
+        }
         int[][] pixels2d = img.getColorPixelGrid();
         out = new short[img.getHeight()][img.getWidth()];
         out2 = new short[img.getHeight()][img.getWidth()];
@@ -71,6 +75,8 @@ public class AnimalTracker implements PixelFilter {
 
         data.addCenter(avgY, avgX);
         img.setPixels(out2);
+
+        frameCounter++;
 
         return img;
     }
@@ -184,7 +190,7 @@ public class AnimalTracker implements PixelFilter {
 
         window.fill(0,255,0);
         window.textSize(30);
-        window.text(Double.toString(data.getDistanceTraveled()), 50, 50);
+        window.text(Double.toString(data.getDistanceTraveled()) + " Centimeters", 50, 50);
 
         window.fill(0,0,0);
         window.ellipse(308, 234, 5,5);
