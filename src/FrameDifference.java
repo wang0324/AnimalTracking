@@ -32,28 +32,6 @@ public class FrameDifference implements PixelFilter {
 
         return img;
     }
-//    BLUR NOT WORKING NEED TO FIX
-//    private short[][] blur(short[][] current) {
-//        double[][] kernal = {{1.0/9, 1.0/9, 1.0/9}, {1.0/9, 1.0/9, 1.0/9}, {1.0/9, 1.0/9, 1.0/9}};
-//        short[][] newimage = new short[current.length][current[0].length];
-//        for (int row = 1; row < current.length-1; row++) { // Move the 3x3 region over the image
-//            for (int col = 1; col < current[0].length-1; col++) {
-//// loop over the 3x3 region
-//                double output = 0;
-//                for (int r = row-1; r <= row+1; r++) {
-//                    for (int c = col-1; c <= col+1; c++) {
-//                        double kernelVal = kernal[row-r+1][col-c+1];
-//                        int pixelVal = current[row][col];
-//                        output += kernelVal*pixelVal;
-//                    }
-//                }
-//                output = output / 9;
-//                if (output < 0) output = 0; // clip to 0
-//                newimage[row][col] = (short)output;
-//            }
-//        }
-//        return newimage;
-//    }
 
     @Override
     public void drawOverlay(PApplet window, DImage original, DImage filtered) {
