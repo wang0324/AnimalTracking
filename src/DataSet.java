@@ -1,4 +1,9 @@
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class DataSet {
 
@@ -39,7 +44,8 @@ public class DataSet {
     public void addCenter(Point center) {
         if (centers != null && previousCenter != null) {
             centers.add(center);
-            this.totalDistance += findDistance(center, previousCenter);
+            this.totalDistance += calculateDistance(center, previousCenter);
+            previousCenter = new Point(center.getRow(), center.getCol());
             ++this.framesPassed;
         } else {
             centers.add(center);
@@ -71,7 +77,7 @@ public class DataSet {
      */
     public double getSpeedAtTime(double time) {
         int frames = convertSecondToFrame(time);
-        return calculateSpeed(findDistance(centers.get(frames), centers.get(frames - 1)), time);
+        return calculateSpeed(calculateDistance(centers.get(frames), centers.get(frames - 1)), time);
     }
 
     /**
@@ -84,7 +90,7 @@ public class DataSet {
     public double getAverageSpeed(double start, double end) {
         int startingFrame = convertSecondToFrame(start);
         int endingFrame = convertSecondToFrame(end);
-        return calculateSpeed(findDistance(centers.get(startingFrame), centers.get(endingFrame)), end - start);
+        return calculateSpeed(calculateDistance(centers.get(startingFrame), centers.get(endingFrame)), end - start);
     }
 
     /**
@@ -106,7 +112,7 @@ public class DataSet {
     public double getDistanceFromWall(double time) {
         int frame = convertSecondToFrame(time);
         Point p = centers.get(frame);
-        return findDistance(p, centerOfField) - radiusOfField;
+        return calculateDistance(p, centerOfField) - radiusOfField;
     }
 
     /**
@@ -120,7 +126,7 @@ public class DataSet {
         for (int i = 0; i < centers.size(); i++) {
             Point curPoint = centers.get(i);
 
-            double distance = findDistance(curPoint, centerOfField);
+            double distance = calculateDistance(curPoint, centerOfField);
 
             if (distance < radiusOfField - distanceFromCenterThreshold) {
                 frames++;
@@ -139,7 +145,7 @@ public class DataSet {
         for (int i = 0; i < centers.size(); i++) {
             Point curPoint = centers.get(i);
 
-            double distance = findDistance(curPoint, centerOfField);
+            double distance = calculateDistance(curPoint, centerOfField);
 
             if (distance < distanceFromCenterThreshold) {
                 frames++;
@@ -154,7 +160,7 @@ public class DataSet {
      * @return total distance traveled
      */
     public double getDistanceTraveled() {
-        return totalDistance;
+        return convertPixelsToCentimeters(totalDistance);
     }
 
 
@@ -182,7 +188,7 @@ public class DataSet {
         for (int i = 1; i < centers.size(); i++) {
             Point curPoint = centers.get(i);
 
-            double distance = findDistance(curPoint, pastPoint);
+            double distance = calculateDistance(curPoint, pastPoint);
 
             if (lower < distance && distance < upper) {
                 time++;
@@ -208,7 +214,7 @@ public class DataSet {
     public double getTimeSpentInARegion(Point center, double radius) {
         int time = 0;
         for (Point point : centers) {
-            if (findDistance(point, center) < radius) {
+            if (calculateDistance(point, center) < radius) {
                 time++;
             }
         }
@@ -248,12 +254,12 @@ public class DataSet {
         }
     }
 
-    private double findDistance(double x1, double y1, double x2, double y2) {
+    private double calculateDistance(double x1, double y1, double x2, double y2) {
         return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
     }
 
-    private double findDistance(Point a, Point b) {
-        return findDistance(a.getCol(), a.getRow(), b.getCol(), b.getRow());
+    private double calculateDistance(Point a, Point b) {
+        return calculateDistance(a.getCol(), a.getRow(), b.getCol(), b.getRow());
     }
 
     private int convertSecondToFrame(double time) {
@@ -267,4 +273,53 @@ public class DataSet {
     private double calculateSpeed(double distance, double time) {
         return distance / time;
     }
+
+    private double convertPixelsToCentimeters(double pixels) {
+        return pixels*(25.0/400.0);
+    }
+
+    private void writeDataToFile(String filePath, String data) {
+        File outFile = new File(filePath);
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(outFile))) {
+            writer.write(data);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String readFileAsString(String filepath) {
+        StringBuilder output = new StringBuilder();
+
+        try (Scanner scanner = new Scanner(new File(filepath))) {
+            while (scanner.hasNext()) {
+                String line = scanner.nextLine();
+                output.append(line + System.getProperty("line.separator"));
+            }
+
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        return output.toString();
+    }
+
+    public void saveDataToFile(String file) {
+        String data = "";
+        for (Point p: centers) {
+            data += (Double.toString(p.getCol()) + ", " + Double.toString(p.getRow()) + "\n");
+        }
+        writeDataToFile("Data\\data.csv", data);
+    }
+    public void loadDataFromFile(String file){
+        String fileData = readFileAsString(file);
+        for (String pointString: fileData.split(System.getProperty("line.separator"))){
+            pointString.trim();
+            String coordinateString[] = pointString.split(",");
+            double x = Double.parseDouble(coordinateString[0]);
+            double y = Double.parseDouble(coordinateString[1]);
+            Point temp = new Point(y,x);
+            centers.add(temp);
+        }
+    }
+
 }
