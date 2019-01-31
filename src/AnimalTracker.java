@@ -60,8 +60,8 @@ public class AnimalTracker implements PixelFilter {
         In drawoverlay draw a point over center and tail and display coordinates that
         can be used to find patterns in mouse behavior
          */
-        if (frameCounter == 300) {
-            data.saveDataToFile("Data\\centers.csv");
+        if (frameCounter == 9994) {
+            data.saveDataToFile("Data\\centerData.csv");
         }
         int[][] pixels2d = img.getColorPixelGrid();
         out = new short[img.getHeight()][img.getWidth()];

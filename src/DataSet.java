@@ -33,7 +33,6 @@ public class DataSet {
     public DataSet() {
         centers = new ArrayList<>();
         timeInRegion = new ArrayList<>();
-
     }
 
     /**
