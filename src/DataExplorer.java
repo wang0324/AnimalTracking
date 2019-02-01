@@ -27,6 +27,19 @@ public class DataExplorer extends PApplet{
         dataset.loadDataFromFile("Data\\centerData.csv");
         System.out.println("Total Distance traveled (cm): " + dataset.getDistanceTraveled());
 
+        dataset.setDistanceFromWallThreshold(10);
+        System.out.println("Total time spent within 10 cm of wall " + dataset.getTimeSpentNearWall() + " seconds");
+
+        System.out.println("Percentage of time spent withn 10 cm is " + (dataset.getTimeSpentNearWall()/dataset.getTotalTime()));
+
+        dataset.setDistanceFromCenterThreshold(10);
+        System.out.println("Total time spent 10 cm within center " + dataset.getTimeSpentNearCenter());
+
+        System.out.println(dataset.convertFrameToSecond((int)dataset.getTimeMovingAtSpeed(-1, 3)));
+
+        System.out.println(dataset);
+
+
     }
 
 //    public void settings() {

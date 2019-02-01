@@ -60,8 +60,9 @@ public class AnimalTracker implements PixelFilter {
         In drawoverlay draw a point over center and tail and display coordinates that
         can be used to find patterns in mouse behavior
          */
-        if (frameCounter == 9994) {
+        if (frameCounter == 9694) {
             data.saveDataToFile("Data\\centerData.csv");
+            System.out.println("Saved!");
         }
         int[][] pixels2d = img.getColorPixelGrid();
         out = new short[img.getHeight()][img.getWidth()];
@@ -102,7 +103,7 @@ public class AnimalTracker implements PixelFilter {
     }
 
     /**
-     * Second Color Mask after blurring frame
+     * Second Color Mask after blurrin g frame
      * @param out2 2D array of grayscale pixels that have already gone through an initail threshold and a blur
      */
     private void performSecondThreshold(short[][] out2) {

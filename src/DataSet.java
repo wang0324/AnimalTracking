@@ -8,23 +8,23 @@ import java.util.Scanner;
 public class DataSet {
 
     //Mouse Location
-    private ArrayList<Point> centers;
+    public ArrayList<Point> centers;
 
     //Mouse Distance
-    private double totalDistance = 0;
+    public double totalDistance = 0;
 
     //Time codes for mouse in a region
-    private ArrayList<Integer> timeInRegion;
+    public ArrayList<Integer> timeInRegion;
 
-    private final int FPS = 30; //temp variable
+    public final int FPS = 30; //temp variable
 
-    private double radiusOfField = 205;
+    public double radiusOfField = 205;
 
-    private double distanceFromCenterThreshold;
+    public double distanceFromCenterThreshold;
 
-    private double distanceFromWallThreshold;
+    public double distanceFromWallThreshold;
 
-    private double framesPassed = 0;
+    public int framesPassed = 0;
 
     public Point centerOfField = new Point(308, 234);
 
@@ -51,6 +51,10 @@ public class DataSet {
             previousCenter = new Point(center.getRow(), center.getCol());
             ++this.framesPassed;
         }
+    }
+
+    public double getTotalTime() {
+        return convertFrameToSecond(framesPassed);
     }
 
     public void addCenter(double r, double c) {
@@ -116,11 +120,9 @@ public class DataSet {
 
     /**
      * Finds time spent "close to" wall (user defined)
-     *
-     * @param threshold distance from wall that would count as "close to" it
      * @return time spent close to wall
      */
-    public double getTimeSpentNearWall(double threshold) {
+    public double getTimeSpentNearWall() {
         int frames = 0;
         for (int i = 0; i < centers.size(); i++) {
             Point curPoint = centers.get(i);
@@ -199,7 +201,7 @@ public class DataSet {
     }
 
     // 79 cm to 420 pixels
-    private double convertSpeedToPixelsPerFrame(double speed) {
+    public double convertSpeedToPixelsPerFrame(double speed) {
         return (speed*(1.0/FPS)*(420.0/79.0));
     }
 
@@ -238,7 +240,7 @@ public class DataSet {
      */
     public void setDistanceFromCenterThreshold(double threshold) {
         if (threshold > 0) {
-            this.distanceFromCenterThreshold = threshold;
+            this.distanceFromCenterThreshold = convertPixelsToCentimeters(threshold);
         }
     }
 
@@ -249,35 +251,39 @@ public class DataSet {
      */
     public void setDistanceFromWallThreshold(double threshold) {
         if (threshold > 0) {
-            distanceFromWallThreshold = threshold;
+            distanceFromWallThreshold = convertPixelsToCentimeters(threshold);
         }
     }
 
-    private double calculateDistance(double x1, double y1, double x2, double y2) {
+    public double calculateDistance(double x1, double y1, double x2, double y2) {
         return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
     }
 
-    private double calculateDistance(Point a, Point b) {
+    public double calculateDistance(Point a, Point b) {
         return calculateDistance(a.getCol(), a.getRow(), b.getCol(), b.getRow());
     }
 
-    private int convertSecondToFrame(double time) {
+    public int convertSecondToFrame(double time) {
         return (int)(time * FPS);
     }
 
-    private double convertFrameToSecond(int frames) {
+    public double convertFrameToSecond(int frames) {
         return (double)(frames/FPS);
     }
 
-    private double calculateSpeed(double distance, double time) {
+    public double calculateSpeed(double distance, double time) {
         return distance / time;
     }
 
-    private double convertPixelsToCentimeters(double pixels) {
+    public double convertPixelsToCentimeters(double pixels) {
         return pixels*(25.0/400.0);
     }
 
-    private void writeDataToFile(String filePath, String data) {
+    public double convertCentimetersToPixels(double cm) {
+        return cm*(400.0/25.0);
+    }
+
+    public void writeDataToFile(String filePath, String data) {
         File outFile = new File(filePath);
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(outFile))) {
@@ -287,7 +293,7 @@ public class DataSet {
         }
     }
 
-    private String readFileAsString(String filepath) {
+    public String readFileAsString(String filepath) {
         StringBuilder output = new StringBuilder();
 
         try (Scanner scanner = new Scanner(new File(filepath))) {
@@ -307,17 +313,18 @@ public class DataSet {
         for (Point p: centers) {
             data += (Double.toString(p.getCol()) + ", " + Double.toString(p.getRow()) + "\n");
         }
-        writeDataToFile("Data\\data.csv", data);
+        writeDataToFile(file, data);
     }
     public void loadDataFromFile(String file){
         String fileData = readFileAsString(file);
         for (String pointString: fileData.split(System.getProperty("line.separator"))){
+
             pointString.trim();
             String coordinateString[] = pointString.split(",");
             double x = Double.parseDouble(coordinateString[0]);
             double y = Double.parseDouble(coordinateString[1]);
             Point temp = new Point(y,x);
-            centers.add(temp);
+            addCenter(temp);
         }
     }
 
