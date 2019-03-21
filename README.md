@@ -43,8 +43,8 @@ This project is currently open source are free for anyone to contribute. Simply 
 ## Authors
 
 * **David Dobervich** - *Framework and UI* - [ddobervich](https://github.com/ddobervich)
-* **Kevin Wang** - *Tracker and DataSet Implementation* - [wang0324](https://github.com/wang0324)
-* **Toma Grundler** - *Tracker and DataSet Implementation* - [tgrundler760](https://github.com/tgrundler760)
+* **Kevin Wang** - *Animal Tracker and DataExplorer - [wang0324](https://github.com/wang0324)
+* **Toma Grundler** - *DataSet* - [tgrundler760](https://github.com/tgrundler760)
 * **Young Yu** - *Github README template* - [yyu2002](https://github.com/yyu2002)
 
 ## License
